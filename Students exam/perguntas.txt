@@ -1,0 +1,13 @@
+1 - Qual o grupo que obteve melhor média de notas(grupo e)
+2 - Qual gênero obteve melhor média de notas(Feminino)
+3 - Média de notas de cada teste (Matematica 66.56 / Leitura 69.38 / Escrita 68.42)
+4 - Média de notas para horas estudadas (menos de 5; entre 5 e 10; mais do que 10)
+5 - Descubra a quantidade de pais que contém ensino superior 
+6 - Qual o tipo de almoço mais popular?
+7 - Qual a correlação entre as colunas?
+8 - Mostre a média de notas entre os estudantes com preparo e sem preparo
+9 - Qual a frequencia dos estudantes que praticam esporte?
+10 - De acordo com a frequencia daqueles que praticam esporte, mostre as médias de notas dos mesmos
+11 - O número de crianças que vão a escola por onibus escolar e privada
+12 - Mostre a quantidade total de alunos que zeraram cada prova
+

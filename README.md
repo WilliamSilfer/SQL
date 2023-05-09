@@ -7,3 +7,4 @@ Utilizando BigQuery da Google busco adentrar o mundo do SQL a fim de extrair inf
 <li>Dentro da pasta de cada projeto terá 2 arquivos txt, um para perguntas de negócio e o outro com link para a fonte do arquivo
   <li>Além dos arquivos txt, terá o arquivo de objeto de estudo
     <li>Por último terá um arquivo sql com as buscas para as respostas
+<br>Projeto 01- Students Exam: Link big query https://console.cloud.google.com/bigquery?sq=842901135701:d4a89c92092c44009615d3a5e213c297

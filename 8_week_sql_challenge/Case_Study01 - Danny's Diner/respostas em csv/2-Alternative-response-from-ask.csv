@@ -1,0 +1,2 @@
+order_date,count(customer_id)
+2021-01-01,15

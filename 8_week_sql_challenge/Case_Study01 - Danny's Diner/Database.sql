@@ -85,8 +85,9 @@ WHERE subquery.customer_id  = sales.customer_id);
 SELECT customer_id, product_id, order_date
 FROM (
 	SELECT customer_id, product_id, order_date,
-        ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY order_date) AS row_num 
+        ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY order_date asc) AS row_num 
     FROM sales
+     WHERE (order_date >='2021-01-07' and customer_id = 'A') OR (order_date >='2021-01-09' and customer_id = 'B')
 ) subquery
 WHERE row_num = 1;
 
@@ -98,27 +99,40 @@ SELECT s.customer_id, s.order_date, menu.product_name,
 FROM members m
 RIGHT  JOIN SALES s ON s.customer_id = m.customer_id
 JOIN menu ON s.product_id = menu.product_id
+ORDER BY customer_id,order_date DESC
 ;
-
-
-
--- Complemento da questão 7 --
-SELECT s.customer_id, s.order_date, menu.product_name,
-	CASE WHEN (s.order_date  >= '2021-01-07') AND (s.customer_id = m.customer_id) THEN 'Y' 
-		ELSE 'N'
-	END AS Membro
-FROM members m
-RIGHT  JOIN SALES s ON s.customer_id = m.customer_id
-JOIN menu ON s.product_id = menu.product_id
-;
-
-
 
 # 7 - Which item was purchased just before the customer became a member?
 SELECT customer_id, product_id, order_date
-FROM ( SELECT customer_id, product_id, order_date, ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY order_date desc) AS row_num
+FROM ( SELECT customer_id, product_id, order_date, 
+		ROW_NUMBER() OVER (PARTITION BY customer_id ORDER BY order_date desc ) AS row_num
 	FROM sales
+    WHERE (order_date < '2021-01-07' AND customer_id = 'A') OR (order_date < '2021-01-09' AND customer_id = 'B')
     ) subquery
     WHERE row_num = 1;
 
 
+# 8 - What is the total items and amount spent for each member before they became a member?
+Select S.customer_id,count(S.product_id ) as Items ,Sum(M.price) as total_sales
+From Sales S
+Join Menu M
+ON m.product_id = s.product_id
+JOIN Members Mem
+ON Mem.Customer_id = S.customer_id
+Where S.order_date < Mem.join_date
+Group by S.customer_id;
+
+# 9 - If each $1 spent equates to 10 points and sushi has a 2x points multiplier — how many points would each customer have?
+
+With Points as
+(
+Select *, Case When product_id = 1 THEN price*20
+               Else price*10
+			   End as Points
+From Menu
+)
+Select S.customer_id, Sum(P.points) as Points
+From Sales S
+Join Points p
+On p.product_id = S.product_id
+Group by S.customer_id;

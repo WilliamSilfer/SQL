@@ -1,0 +1,4 @@
+customer_id,product_id,order_date
+A,1,2021-01-01
+B,2,2021-01-01
+C,3,2021-01-01

@@ -1,3 +1,4 @@
+# Conexão com banco de dados
 import mysql.connector
 
 conn = mysql.connector.connect(

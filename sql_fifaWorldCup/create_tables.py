@@ -1,6 +1,8 @@
+# Criação de tabelas
+
 import conexao
 conexao
-
+# Conexão com banco de dados
 mycursor = conexao.conn.cursor()
 mycursor.execute("CREATE DATABASE IF NOT EXISTS fifaWorldCup")
 
@@ -13,7 +15,7 @@ print("fifaWorldCup database use now")
 print('-----------------------------------------------------------')
 print('\nCreating tables')
 #---------------------------------------------------------
-# Create table WorldCups
+# Create tables
 create_table_worldcups = '''CREATE TABLE IF NOT EXISTS WorldCups
     (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -44,11 +46,40 @@ create_table_worldcupPlayers = '''
     Event varchar(30)
     );
     '''
+create_table_worldCupMatches = '''
+    CREATE TABLE IF NOT EXISTS WorldCupMatches 
+    (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    year DATE,
+    date date,
+    time time,
+    Stage varchar(30),
+    Stadium varchar(70),
+    City varchar(70),
+    HomeTeamName varchar(50),
+    HomeTeamGoals int(2),
+    AwayTeamGoals int(2),
+    AwayTeamName varchar(50),
+    WinCondition varchar(70),
+    Attendance int(7),
+    HalfTimeHomeGoals int(3),
+    HalfTimeAwayGoals int(3),
+    Referee varchar(60),
+    Assistant1 varchar(70),
+    Assistant2 varchar(70),
+    RoundID int,
+    MatchID int,
+    HomeTeamInitials varchar(10),
+    AwayTeamInitials varchar(10)
+    );
+'''
+
 mycursor.execute(create_table_worldcups)
 mycursor.execute(create_table_worldcupPlayers)
+mycursor.execute(create_table_worldCupMatches)
 conexao.conn.commit()
 #----------------------------------------------------------------------------
-
+# SHOW TABLES
 print('\nTables Created\n')
 
 show_tables_query = 'SHOW TABLES'
@@ -56,7 +87,6 @@ mycursor.execute(show_tables_query)
 tabelas = mycursor.fetchall()
 [print(i) for i in tabelas]
 conexao.conn.commit()
-
 
 mycursor.close()
 conexao.conn.close()
